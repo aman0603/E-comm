@@ -5,13 +5,13 @@ export const getCartProducts = async (req, res) => {
 
     //add quatity for each product
     const cartItems = products.map((product) => {
-      const item = req.user.cartItems.find((item) => item.id === product.id); //returns undefined or object of that item
+      const item = req.user.cartItems.find((cartItem) => cartItem.id === product.id); //returns undefined or object of that item
       return { ...product.toJSON(), quantity: item.quantity };
     });
-    res.status(200).json(cart);
+    res.status(200).json(cartItems); //send cartItems array as response
   } catch (error) {
     console.log("Error in getCartItems controller", error.message);
-    res
+    res 
       .status(500)
       .json({ message: "Internal server error", error: error.message });
   }

@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { redis } from "../lib/redis.js";
 import { set } from "mongoose";
 
+
 const generateTokens = (userId) => {
   const accessToken = jwt.sign({ userId }, process.env.JWT_ACCESS_KEY, {
     expiresIn: "15m",
@@ -98,7 +99,7 @@ export const login = async (req, res) => {
     //authenticate user
     const { accessToken, refreshToken } = generateTokens(user._id);
 
-    await storeRefreshToken(user._id, refreshToken);
+    await storeRefreshToken(user._id, refreshToken);5
     setCookie(res, accessToken, refreshToken);
 
     res.status(200).json({
@@ -197,3 +198,24 @@ export const refreshToken = async (req, res) => {
 //accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODA0YTQ3ZjA5MzQ3ZGM1NTliMTJiMTciLCJpYXQiOjE3NDUxNDkxODEsImV4cCI6MTc0NTE1MDA4MX0.9MvCDbdZtcha_otfwEEyNWBCkipCVl6g3tIPzZFK6zc; Path=/; HttpOnly; Expires=Sun, 20 Apr 2025 11:54:41 GMT;
 
 
+export const getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password -__v");
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json({
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.log("Error in getProfile controller", error.message);
+    res
+      .status(500)
+      .json({ message: "Internal server error", error: error.message });
+  }
+};
