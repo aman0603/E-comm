@@ -1,1 +1,117 @@
 @import "tailwindcss";
+
+/* Add this to your global CSS file, e.g., src/index.css */
+
+/* Basic transitions for hover effects (already used in Tailwind classes) */
+/* .transition { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; } */
+/* .duration-300 { transition-duration: 300ms; } */
+/* .ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); } */
+
+/* Keyframe Animations */
+@keyframes fadeInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Background animation keyframes */
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(20px);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinReverseSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes pingSlow {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+}
+
+/* Apply Animations */
+
+/* Hero Section Text & Button */
+.animate-fade-in-up {
+  animation: fadeInFromBottom 1s ease-out forwards;
+}
+
+/* Staggered product card animation */
+.product-card {
+  opacity: 0; /* Start hidden */
+  animation: fadeInFromBottom 0.6s ease-out forwards !important; /* Base animation */
+  /* animation-delay is set inline in JSX */
+}
+
+/* Ensure products are hidden before animation */
+.products-visible .product-card {
+  opacity: 1; /* Ensures they start invisible before the animation kicks in */
+}
+
+/* CTA Section Text & Button (with a slight delay) */
+.animate-fade-in-up-delay {
+  animation: fadeInFromBottom 1s ease-out 0.3s forwards; /* 0.3s delay */
+}
+
+/* Background animations */
+.animate-bounce-slow {
+  animation: bounceSlow 10s infinite ease-in-out;
+}
+.animate-spin-slow {
+  animation: spinSlow 15s infinite linear;
+}
+.animate-spin-reverse-slow {
+  animation: spinReverseSlow 18s infinite linear;
+}
+.animate-ping-slow {
+  animation: pingSlow 12s infinite ease-in-out;
+}
+
+/* Utility to ensure elements start hidden for animation */
+.homepage-wrapper *[class*="animate-"] {
+  opacity: 0; /* Default hidden state for animated elements */
+}

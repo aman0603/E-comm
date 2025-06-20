@@ -193,25 +193,10 @@ export const refreshToken = async (req, res) => {
   }
 };
 
-//accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODA0YTQ3ZjA5MzQ3ZGM1NTliMTJiMTciLCJpYXQiOjE3NDUxNDkwMTcsImV4cCI6MTc0NTE0OTkxN30.EYKG3TDj2Uzh01-41gaxPCfYq42QroUE9s3jlWDKNhI; Path=/; HttpOnly; Expires=Sun, 20 Apr 2025 11:51:57 GMT;
-
-//accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODA0YTQ3ZjA5MzQ3ZGM1NTliMTJiMTciLCJpYXQiOjE3NDUxNDkxODEsImV4cCI6MTc0NTE1MDA4MX0.9MvCDbdZtcha_otfwEEyNWBCkipCVl6g3tIPzZFK6zc; Path=/; HttpOnly; Expires=Sun, 20 Apr 2025 11:54:41 GMT;
-
-
 export const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select("-password -__v");
-
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-    res.status(200).json({
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
+    // const user = await User.findById(req.user._id).select("-password -__v");
+    res.json(req.user);
   } catch (error) {
     console.log("Error in getProfile controller", error.message);
     res
