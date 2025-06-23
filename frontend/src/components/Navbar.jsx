@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, ShoppingCart, User, Menu, X, Heart, LogOut, Settings } from 'lucide-react';
 import { useUserStore } from '../store/useUserStore';
-// import { useCartStore } from '../store/useCartStore';
+import { useCartStore } from '../store/useCartStore';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { user, logout } = useUserStore();
-  // const { cart } = useCartStore();
+  const { cart } = useCartStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {

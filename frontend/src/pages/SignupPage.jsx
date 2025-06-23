@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUserStore } from "../store/useUserStore";
 
 const InputField = ({ 
@@ -43,7 +43,7 @@ export default function SignupPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleChange = useCallback((e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -55,7 +55,7 @@ export default function SignupPage() {
     const result = await signup(name, email, password, confirmPassword);
     if (result === "success") {
       setForm({ name: "", email: "", password: "", confirmPassword: "" });
-      navigate("/");
+      // navigate("/");
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
@@ -41,11 +41,17 @@ const InputField = ({
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const { login, loading } = useUserStore();
+  const { login, loading,user } = useUserStore();
   const navigate = useNavigate();
-
+  // Redirect if user is already logged in
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/");
+  //   }
+  // }, [user]);
   const handleChange = useCallback((e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
   }, []);
 
   const handleLogin = async (e) => {
@@ -53,7 +59,7 @@ export default function LoginPage() {
     const { email, password } = form;
     const result = await login(email, password);
     if (result === "success") {
-      navigate("/");
+      setForm({ email: "", password: "" });
     }
   };
 
