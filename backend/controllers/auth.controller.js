@@ -196,7 +196,7 @@ export const refreshToken = async (req, res) => {
 export const getProfile = async (req, res) => {
   try {
     // const user = await User.findById(req.user._id).select("-password -__v");
-    res.json(req.user);
+    res.json({user:req.user});
   } catch (error) {
     console.log("Error in getProfile controller", error.message);
     res

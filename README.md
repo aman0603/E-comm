@@ -6,7 +6,7 @@ A full-stack e-commerce application built using **React**, **Express.js**, and *
 
 ## 📸 Screenshot
 
-![App Screenshot](../E-commerce/frontend/src/assets/image.png)
+![App Screenshot](./frontend/src/assets/image.png)
 
 
 ---
@@ -31,7 +31,7 @@ A full-stack e-commerce application built using **React**, **Express.js**, and *
 ---
 
 ## 📂 Project Structure
-
+```
 backend/
 ├── controllers/
 ├── middleware/
@@ -47,7 +47,7 @@ frontend/
 │ ├── lib/
 │ └── main.jsx
 └── index.html
-
+```
 
 ---
 
@@ -96,93 +96,38 @@ npm run dev
 
 ---
 
-🔐 Authentication
-Users can register and log in using email and password.
 
-Access tokens are issued via JWT and stored in HTTP-only cookies.
+## Authentication
 
-Middlewares:
+- Users can **register and log in** using email and password.
+- **JWT tokens** are issued and stored in **HTTP-only cookies** for secure sessions.
 
-protectRoute: Secures routes for authenticated users.
+###  Middleware
 
-adminRoute: Restricts access to admin-only functionality.
+- `protectRoute` – Restricts access to authenticated users only.
+- `adminRoute` – Allows access to admin-only resources.
 
-💳 Payment Integration
-Integrated with Razorpay.
+---
 
-Users can complete purchases via Razorpay Checkout.
+## Payment Integration
 
-Server-side:
+- Integrated with **Razorpay** for secure payments.
+- Users complete purchases via **Razorpay Checkout**.
 
-create-checkout-session initializes Razorpay session.
+### Server-side Logic
 
-payment success route verifies transactions.
+- `POST /api/payments/create-checkout-session` – Initializes Razorpay session.
+- `POST /api/payments/success` – Verifies successful transaction.
 
-📊 Admin Analytics
+---
+
+## Admin Analytics
+
 Admin users can view:
 
-Total revenue
+- **Total revenue**
+- **Sales trends**
 
-Sales trends
+> All analytics endpoints are protected by both `protectRoute` and `adminRoute`.
 
-Endpoints protected by both protectRoute and adminRoute.
-
-📦 API Endpoints (Highlights)
-Authentication
-POST /api/auth/signup – Register a new user
-
-POST /api/auth/login – Login
-
-POST /api/auth/logout – Logout
-
-GET /api/auth/profile – Fetch user profile
-
-Products
-GET /api/products – List all products (admin)
-
-GET /api/products/featured – List featured products
-
-POST /api/products – Add new product (admin)
-
-DELETE /api/products/:id – Delete product (admin)
-
-GET /api/products/category/:category – Products by category
-
-Cart
-GET /api/cart – Fetch user cart
-
-POST /api/cart/add – Add item to cart
-
-POST /api/cart/remove – Remove item from cart
-
-Coupons
-POST /api/coupons – Create a new coupon (admin)
-
-GET /api/coupons – Fetch all coupons
-
-POST /api/coupons/apply – Apply a coupon to the cart
-
-Payments
-POST /api/payments/create-checkout-session – Create Razorpay session
-
-POST /api/payments/success – Handle success payment
-
-Analytics
-GET /api/analytics/overview – Sales overview (admin)
-
-GET /api/analytics/daily-sales – Daily revenue (admin)
-
-🖼 Frontend Features
-HomePage – Displays featured and recommended products
-
-FeaturedProducts.jsx
-
-PeopleAlsoBought.jsx
-
-Authentication Pages – LoginPage, SignupPage
-
-Cart & Checkout – Razorpay-integrated payment flow
-
-State Management – Zustand-based global store
-
-API Handling – Axios setup in lib/axios.js
+---
